@@ -1,9 +1,10 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import './CartDrawer.css';
 
 export const CartDrawer: React.FC = () => {
     const { isCartOpen, setIsCartOpen, items, removeFromCart, updateQuantity, totalPrice } = useCart();
+    const navigate = useNavigate();
 
     if (!isCartOpen) return null;
 
@@ -20,6 +21,22 @@ export const CartDrawer: React.FC = () => {
                         </svg>
                     </button>
                 </div>
+
+                {items.length > 0 && (
+                    <div className="shipping-progress-container">
+                        <p className="shipping-message">
+                            {totalPrice >= 150000
+                                ? "¡Felicidades! Tienes envío gratis 🚚✨"
+                                : `Te faltan $${(150000 - totalPrice).toLocaleString('es-CO')} para envío gratis 🚚`}
+                        </p>
+                        <div className="shipping-bar-bg">
+                            <div
+                                className={`shipping-bar-fill ${totalPrice >= 150000 ? 'success' : ''}`}
+                                style={{ width: `${Math.min((totalPrice / 150000) * 100, 100)}%` }}
+                            ></div>
+                        </div>
+                    </div>
+                )}
 
                 <div className="cart-body">
                     {items.length === 0 ? (
@@ -68,7 +85,14 @@ export const CartDrawer: React.FC = () => {
                             <span>Total</span>
                             <span>${totalPrice.toLocaleString('es-CO')}</span>
                         </div>
-                        <button className="btn btn-primary" style={{ width: '100%', padding: '1rem' }} onClick={() => alert('¡Simulación de checkout exitosa! Redirigiendo a pasarela de pagos...')}>
+                        <button
+                            className="btn btn-primary"
+                            style={{ width: '100%', padding: '1rem' }}
+                            onClick={() => {
+                                setIsCartOpen(false);
+                                navigate('/checkout');
+                            }}
+                        >
                             Ir a Pagar
                         </button>
                     </div>

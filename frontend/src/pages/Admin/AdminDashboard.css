@@ -1,0 +1,147 @@
+.admin-page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--admin-text);
+}
+
+.admin-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.admin-kpi-card {
+    background-color: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kpi-green {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+}
+
+.kpi-purple {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+}
+
+.kpi-yellow {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+.kpi-red {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+.kpi-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.kpi-label {
+    font-size: 0.875rem;
+    color: var(--admin-text-muted);
+    margin: 0 0 0.25rem 0;
+}
+
+.kpi-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--admin-text);
+}
+
+.kpi-sub {
+    font-size: 0.875rem;
+    color: var(--admin-text-muted);
+    font-weight: normal;
+}
+
+.admin-dashboard-tables {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .admin-dashboard-tables {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.admin-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-card-header h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.text-danger {
+    color: #f87171 !important;
+}
+
+.text-warning {
+    color: #fbbf24 !important;
+}
+
+.text-success {
+    color: #34d399 !important;
+}
+
+.text-primary {
+    color: #a78bfa !important;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.admin-empty-text {
+    color: var(--admin-text-muted);
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.admin-flex-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.admin-row-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 0.25rem;
+    object-fit: cover;
+    background-color: #0f172a;
+}

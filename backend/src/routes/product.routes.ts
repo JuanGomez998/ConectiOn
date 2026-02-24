@@ -1,13 +1,22 @@
 import { Router } from 'express';
-import { getProducts, getProductById, createProduct } from '../controllers/product.controller';
+import {
+    getProducts,
+    getProductById,
+    createProduct,
+    updateProduct,
+    deleteProduct
+} from '../controllers/product.controller';
+import { protect, adminOnly } from '../middlewares/authMiddleware';
 
 const router = Router();
 
-router.route('/')
-    .get(getProducts)
-    .post(createProduct);
+// Rutas Públicas
+router.get('/', getProducts);
+router.get('/:id', getProductById);
 
-router.route('/:id')
-    .get(getProductById);
+// Rutas Privadas / Admin
+router.post('/', protect, adminOnly, createProduct);
+router.put('/:id', protect, adminOnly, updateProduct);
+router.delete('/:id', protect, adminOnly, deleteProduct);
 
 export default router;

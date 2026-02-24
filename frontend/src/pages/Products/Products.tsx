@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ProductCard, Product } from '../../components/ProductCard/ProductCard';
+import api from '../../services/api';
 import './Products.css';
 
 const categories = ['Todos', 'Audio', 'Wearables', 'Accesorios'];
@@ -12,10 +13,9 @@ export const Products: React.FC = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/products');
-                const data = await response.json();
-                if (data.success) {
-                    setAllProducts(data.data);
+                const response = await api.get('/products');
+                if (response.data && response.data.success) {
+                    setAllProducts(response.data.data);
                 }
             } catch (error) {
                 console.error("Error fetching products:", error);

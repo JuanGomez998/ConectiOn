@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Hero } from '../../components/Hero/Hero';
 import { Features } from '../../components/Features/Features';
 import { ProductCard, Product } from '../../components/ProductCard/ProductCard';
+import api from '../../services/api';
 
 export const Home: React.FC = () => {
     const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
@@ -10,11 +11,13 @@ export const Home: React.FC = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/products');
-                const data = await response.json();
+                const response = await api.get('/products');
+                const data = response.data;
                 if (data.success) {
-                    // Solo mostramos los 3 más recientes en el Home
-                    setFeaturedProducts(data.data.slice(0, 3));
+                    // Filtrar los productos marcados como Destacados desde el Panel Admin
+                    const featured = data.data.filter((p: any) => p.isFeatured);
+                    // Si no hay destacados, mostrar los 4 más recientes por defecto
+                    setFeaturedProducts(featured.length > 0 ? featured : data.data.slice(0, 4));
                 }
             } catch (error) {
                 console.error("Error fetching products:", error);
